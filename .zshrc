@@ -5,7 +5,7 @@ export ZSH="$HOME/.oh-my-zsh"
 
 # Ajout PNPM et local bin
 export PNPM_HOME="$HOME/.local/share/pnpm"
-export PATH="$PNPM_HOME:$HOME/.local/bin:$PATH"
+export PATH="/usr/local/bin:$PNPM_HOME:$HOME/.local/bin:$PATH"
 
 # ================================
 # Oh My Zsh configuration
@@ -15,6 +15,7 @@ ZSH_THEME="robbyrussell"
 # Plugins utiles
 plugins=(
   git
+  gitfast
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -41,8 +42,7 @@ function git_prompt_info() {
     echo "%{$fg[blue]%}git:(%{$fg[red]%}$branch%{$fg[blue]%})%{$reset_color%}"
 }
 
-
-# ================================
+# ==============================
 # Aliases pratiques
 # ================================
 alias gs="git status"
@@ -53,9 +53,17 @@ alias gb="git branch"
 alias gco="git checkout"
 alias gsw="git switch"
 alias gsc="git switch -c"
+alias gcb='f() { KEEP_BRANCHES="$@"; for branch in $(git branch --format="%(refname:short)"); do if [[ ! " $KEEP_BRANCHES " =~ " $branch " ]]; then git branch -D "$branch"; fi; done; unset f; }; f'
+
 
 alias cl="clear"
 alias ll="ls -la"
+
+alias dps="docker ps"
+alias dl="docker logs -f"
+alias dr="docker restart"
+alias dcu="docker compose up -d"
+alias dcd="docker compose down"
 
 
 # ================================
@@ -66,3 +74,14 @@ ENABLE_CORRECTION="true"
 
 # Historique avec timestamp
 HIST_STAMPS="yyyy-mm-dd"
+
+# Historique
+HISTSIZE=100000
+SAVEHIST=100000
+HISTFILE=~/.zsh_history
+setopt hist_ignore_all_dups
+setopt hist_ignore_space
+setopt share_history
+
+# opencode
+export PATH=/home/maxence/.opencode/bin:$PATH
