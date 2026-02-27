@@ -5,6 +5,9 @@
 
 set -e
 
+# Se placer dans le répertoire du script
+cd "$(dirname "$0")"
+
 echo "🚀 Installation de la configuration Hyprland..."
 
 # Couleurs pour les messages
@@ -98,12 +101,24 @@ if [ -d "$HOME/.config/hypr" ]; then
     cp -r "$HOME/.config/hypr" "$backup_dir/"
 fi
 
+if [ -d "$HOME/.config/waybar" ]; then
+    print_warning "Sauvegarde de la configuration Waybar existante..."
+    cp -r "$HOME/.config/waybar" "$backup_dir/"
+fi
+
 # Copier les nouvelles configurations
 cp -r ./hypr/* "$HOME/.config/hypr/"
-cp -r ./waybar/* "$HOME/.config/waybar/"
 cp -r ./rofi/* "$HOME/.config/rofi/"
 cp -r ./kitty/* "$HOME/.config/kitty/"
 cp -r ./Thunar/* "$HOME/.config/Thunar/"
+
+# Copier les fichiers mechabar vers ~/.config/waybar
+print_status "Copie de la configuration Waybar (mechabar)..."
+cp -r ./mechabar/assets ./mechabar/config.jsonc ./mechabar/modules \
+      ./mechabar/scripts ./mechabar/style.css ./mechabar/styles \
+      ./mechabar/theme.css ./mechabar/themes "$HOME/.config/waybar/"
+
+bash ./mechabar/install
 
 # Rendre les scripts exécutables
 print_status "Définition des permissions pour les scripts..."
