@@ -1,0 +1,3 @@
+[submodule "mechabar"]
+	path = mechabar
+	url = https://github.com/sejjy/mechabar.git
