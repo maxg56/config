@@ -1,0 +1,38 @@
+# --- Secrets et identifiants (ne jamais versionner) ---
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+credentials*
+!*.example
+.credentials.json
+**/.credentials.json
+*.token
+secrets/
+
+# --- Claude Code : état local, caches et historique ---
+claude/.credentials.json
+claude/.last-cleanup
+claude/history.jsonl
+claude/daemon.status.json
+claude/gh-pr-status-cache.json
+claude/mcp-needs-auth-cache.json
+claude/cache/
+claude/telemetry/
+claude/todos/
+claude/projects/
+claude/shell-snapshots/
+claude/statsig/
+claude/session-env/
+claude/file-history/
+claude/ide/
+
+# --- Divers ---
+.DS_Store
+*.swp
+*~
