@@ -46,3 +46,16 @@ Supports multiple themes:
 - Gruvbox (Dark, Light)
 
 Theme switching available through waybar scripts.
+
+### claude/
+Configuration de Claude Code (`settings.json`, `CLAUDE.md`, `plans/`).
+
+## Sécurité
+
+Les fichiers d'identifiants et l'état local des outils ne sont **pas** versionnés (voir `.gitignore`) :
+
+- `claude/.credentials.json` est généré localement par `claude` lors de la connexion. Un modèle sans valeur réelle est fourni dans `claude/.credentials.json.example` ; ne jamais y mettre de vrai jeton.
+- L'historique, les caches, la télémétrie et les todos de `claude/` sont ignorés.
+- Les fichiers `.env`, `*.key`, `*.pem`, `credentials*` sont ignorés par défaut.
+
+Si un identifiant a été publié par erreur, il doit être considéré comme compromis : le révoquer/régénérer côté service, même après l'avoir retiré du dépôt.
